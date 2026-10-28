@@ -4,13 +4,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+@CrossOrigin(origins = "*") 
 @RestController // Punto de entrada para el mapeo de los verbos
 public class SaludarControlador {
     String nombre;
@@ -27,7 +28,7 @@ public class SaludarControlador {
 
     @PostMapping("/nombramientos")
     public void nombre(){
-        nombre="lou";
+        nombre="boladearroz";
     }
 
     // PUT (actualizar)
@@ -68,10 +69,12 @@ public class SaludarControlador {
                     <li><a href='/despedidas'>/despedidas</a></li>
                     <li>/nombramientos(POST * PUT * DELETE)</li>
                     <li><a href='/saludador/default'>/saludador/{nombre}</a></li>
-                    <li><a href='/saludador2/default2'>/saludador2/{nombreX}</a></li>
+                    <li><a href='/saludador2/default2'>/saludador/{nombreX}</a></li>
 
                     <li>/crearSaludador</li>
                     <li><a href='/obtenerSaludador'>/obtenerSaludador/{nombreX}</a></li>
+                    <li><a href='/getQuery'>/getQuery?nombre=xxx&paterno=yyy</a></li>
+                    <li><a href='/getQuery2'>/getQuery2?nombre=xxx[&paterno=yyy]</a></li>
                     
                 </ul>
                 
@@ -100,11 +103,9 @@ public class SaludarControlador {
     }
 
     @GetMapping("/getQuery2")
-    public String GetQueryString2(@RequestParam String nombre, @RequestParam(defaultValue="") String paterno){
+    public String GetQueryString2(@RequestParam String nombre, @RequestParam(defaultValue= "") String paterno){
         return nombre + " " + paterno;
 
     }
-
-    
 
 }
